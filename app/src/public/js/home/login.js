@@ -11,7 +11,7 @@ function login(){
         id: id.value,
         password : password.value,
     }
-    console.log(req);
+  
  fetch("/login", {
     method: "POST",
  
@@ -20,5 +20,13 @@ function login(){
     },
     body: JSON.stringify(req),
     
+ }).then((res)=>res.json())
+ .then((res)=>{
+   if(res.success){
+    location.href="http://localhost:3000/";
+     alert(res.success);
+   }else{
+     alert(res.msg);
+   }
  });
 }
