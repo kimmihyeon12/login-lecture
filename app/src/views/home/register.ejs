@@ -1,4 +1,4 @@
- 
+
 <!DOCTYPE html>
     <html lang="ko">
     <head>
@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="/css/home/login.css">
      
         <!-- 미들웨어이 의해(app.js) js파일 public 안에있는 자바스트립트 파일로 이동 -->
-        <script src="/js/home/login.js" defer></script>
+        <script src="/js/home/register.js" defer></script>
         <title>Document</title>
     </head>
     <body>
@@ -18,9 +18,11 @@
          
             <form class="login-form">
               <input id="id" type="text" placeholder="아이디" />
+              <input id="name" type="password" placeholder="이름"/>
               <input id="password" type="password" placeholder="비밀번호"/>
-              <p id="button">로그인</p>
-              <p class="message">Not registered? <a href="/register">회원가입</a></p>
+              <input id="confirm-password" type="password" placeholder="비밀번호 확인"/>
+              <p id="button">회원가입</p>
+              <p class="message">already registered? <a href="/login">로그인</a></p>
             </form>
           </div>
           

@@ -2,7 +2,7 @@
 
 const id = document.querySelector("#id");
 const password = document.querySelector("#password");
-const loginBtn = document.querySelector("button");
+const loginBtn = document.querySelector("#button");
 
 loginBtn.addEventListener("click", login);
 
@@ -20,7 +20,7 @@ function login(){
     },
     body: JSON.stringify(req),
     
- }).then((res)=>res.json())
+ }).then((res)=>res.json()) // 🥕
  .then((res)=>{
    if(res.success){
     location.href="http://localhost:3000/";
