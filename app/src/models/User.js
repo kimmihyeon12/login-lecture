@@ -4,12 +4,11 @@ class User{
     constructor(body){
         this.body = body;
     }
-    login(){
+    async login(){
      const client =  this.body;
-     // const {id,password} = UserStorge.getUsers("id","password");
-     // console.log(id,password);
-     const {id,password} = UserStorge.getUserInfo(client.id);
-     if(id){
+     //await -> 항상 promise반환해주는곳에만 할수있음!
+     const {id,password} = await UserStorge.getUserInfo(client.id);
+    if(id){
          if(id===client.id && password===client.password){
          return {success:true};
          }
