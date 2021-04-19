@@ -12,8 +12,11 @@ class UserStorge{
         },{});
         return userInfo;
     }
-    static #getUsers(data, fields){
+    static #getUsers(data,isAll, fields){
         //reduce 사용법 이해하기 🥕
+        const users = JSON.parse(data);
+        if(isAll) return users;
+        // user 모든 데이터 가져오기!
         const newUsers = fields.reduce((newUsers,field)=>{
             //   console.log(newUsers,field);
                if(users.hasOwnProperty(field)){
@@ -25,11 +28,11 @@ class UserStorge{
           // console.log(newUsers);
            return newUsers;
     }
-    static getUsers(...fields){
+    static getUsers(isAll, ...fields){
         // const users = this.#users;
         return fs.readFile("./src/databases/user.json")
         .then((data)=>{
-          return this.#getUsers(data,fields)
+          return this.#getUsers(data,isAll,fields)
         })
         .catch(console.error);
         
@@ -46,11 +49,17 @@ class UserStorge{
     //<pending> 데이터를 모두 읽어오지 못했다 🥕
     static async save(userInfo){
         //json데이터 읽어온다음에 넣어주기
-        const users = await this.getUsers("id","password","name");
+        const users = await this.getUsers(true);
         console.log(users);
-        //데이터 추가
-
-        //fs.writeFile("./src")
+        if(users.id.includes(userInfo.id)){
+            throw "이미존재하는아이디입니다";
+        }
+        users.id.push(userInfo.id);
+        users.name.push(userInfo.name);
+        users.password.push(userInfo.password);
+        
+        fs.writeFile("./src/databases/user.json" , JSON.stringify(users));
+         return {success:true};
      
     }
 }
